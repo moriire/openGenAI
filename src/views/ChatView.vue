@@ -26,7 +26,7 @@ export default {
             const signal = controller.signal;
             //const message = { role: 'user', content: msg.value };
             try {
-                const res = await axios.post(`https://moriire-opengenai.hf.space/generate/`,
+                const res = await axios.post(`https://moriire-opengenai.hf.space/chat/`,
                     {
                         //'model': glob.selectedModel,
                         //"messages": [message],
