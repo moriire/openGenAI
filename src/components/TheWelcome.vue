@@ -25,7 +25,7 @@ export default {
       //const message = { role: 'user', content: msg.value };
 
       try {
-        const res = await axios.post(`https://moriire-opengenai.hf.space/generate/`,
+        const res = await axios.post(`https://moriire-opengenai.hf.space/generate`,
           {
             //'model': glob.selectedModel,
             //"messages": [message],
@@ -92,9 +92,10 @@ export default {
 </script>
 
 <template>
-  <div class="row justify-content-center .align-items-center" style="height: 80vh; overflow-y: auto;">
-    <div id="gensys" v-show="response"
-      class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 .start-50 .bottom-0 .translate-middle-x">
+  <div class="row justify-content-center .align-items-center" style="height: 80vh;">
+    <div id="gensys" 
+    v-show="response" 
+      class="col-lg-10 col-md-10 col-sm-10 col-xs-12 mx-2 my-2 fs-4">
       {{ response }}
     </div>
   </div>
@@ -114,8 +115,8 @@ export default {
           <button data-bs-toggle-tooltip="Copy AI response" class="btn btn-outline-warning" v-show="response"
             @click="copyOutput">
             <i class="bi bi-clipboard"></i></button>
-          <button title="Copy response to clipboard" data-bs-toggle="tooltip" data-bs-placement="top"
-            class="btn btn-outline-warning" @click="copyOutput" v-show="response">Copy</button>
+          <!--button title="Copy response to clipboard" data-bs-toggle="tooltip" data-bs-placement="top"
+            class="btn btn-outline-warning" @click="copyOutput" v-show="response">Copy</button-->
           <button class="btn btn-outline-warning" @click="clearOutput" v-show="response">Clear</button>
         </div>
         <div class="col-4">
@@ -141,21 +142,16 @@ export default {
     </div>
   </div>
 </template>
-<style scoped>
+<style>
 textarea {
   outline-color: yellow;
 }
 
-gensys {
-  min-width: min-content;
-  max-width: max-content;
-  min-height: min-content;
-  max-height: 70vh;
-  overflow-y: scroll;
+div#gensys {
+  overflow-y:scroll;
   white-space: pre-line;
+  color: yellow !important;
+  max-height: 80vh;
 }
 
-.div#main {
-  min-height: 70vh;
-}
 </style>
