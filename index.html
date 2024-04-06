@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>OllamaGen</title>
+    <style>
+      /* Styling for Navbar */
+      body {
+        display: block;
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <!--script type="module" src="/src/theme.js"></script-->
+    <!--script>
+      function getLocalStream() {
+        navigator.mediaDevices
+          .getUserMedia({ video: false, audio: true })
+          .then((stream) => {
+            window.localStream = stream
+            window.localAudio.srcObject = stream
+            window.localAudio.autoplay = true
+          })
+          .catch((err) => {
+            console.error(`you got an error: ${err}`)
+          })
+      }
+
+      getLocalStream()
+    </script-->
+  </body>
+</html>
