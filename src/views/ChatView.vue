@@ -40,7 +40,6 @@ export default {
                     },
                     { signal }
                 );
-                console.log(res.data);
                 //total_duration.value = res.data.context.length / formatTime(res.data.eval_duration);
                 //response.value = res.data.message.content
                 response.value = res.data.choices[0].message.content
@@ -119,7 +118,6 @@ export default {
         </div>
         <div
             class="row justify-content-center .align-items-center sticky-bottom .start-50 .bottom-0 .translate-middle-x">
-
             <div
                 class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 .fixed-bottom .start-50 .bottom-0 .translate-middle-x">
                 <div class="input-group my-4">

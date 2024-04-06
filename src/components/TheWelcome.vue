@@ -42,7 +42,7 @@ export default {
         );
 
         //total_duration.value = res.data.context.length / formatTime(res.data.eval_duration);
-        response.value = `${msg.value}:\n${res.data.choices[0].message.content}`
+        response.value = `${msg.value}:\n\n${res.data.choices[0].message.content}`
         console.log(res.data.choices[0].message.content)
       } catch (errors) {
         console.log(errors)
@@ -92,18 +92,17 @@ export default {
 </script>
 
 <template>
-  <div class="row justify-content-center .align-items-center" id="main">
-    <div class="col-lg-10 col-md-10 mx-3 mb-2 bg-grey text-light border border-top border-bottom-0 p-3 fs-3 overflow-y"
-      id="gensys" v-show="response">
-
+  <div class="row justify-content-center .align-items-center" style="height: 80vh; overflow-y: auto;">
+    <div id="gensys" v-show="response"
+      class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 .start-50 .bottom-0 .translate-middle-x">
       {{ response }}
-
     </div>
   </div>
-  <div class="row justify-content-center .align-items-center mt-2 position-sticky .start-50 .bottom-0 sticky-bottom .translate-middle-x">
-    <div
-      class="col-lg-10 col-md-10 col-sm-10 col-xs-12 mx-4 ">
-      <div class="row justify-content-between">
+  <div
+    class="row justify-content-center .align-items-center position-sticky sticky-bottom .start-50 .bottom-0 .translate-middle-x">
+
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+      <div class="row justify-content-between my-2">
         <div class="col-8">
           <button class="btn btn-outline-warning" v-show="disable" @click="stopGen">
             <i class="bi bi-stop-fill"></i>
@@ -125,7 +124,7 @@ export default {
           </h2>
         </div>
       </div>
-      <div class="input-group .my-2">
+      <div class="input-group">
         <!--button class="input-group-text bg-warning text-dark" id="basic" @click="tts()">
           <i class="bi bi-mic-fill"></i>
       </button-->
@@ -147,7 +146,7 @@ textarea {
   outline-color: yellow;
 }
 
-#gensys {
+gensys {
   min-width: min-content;
   max-width: max-content;
   min-height: min-content;
@@ -156,7 +155,7 @@ textarea {
   white-space: pre-line;
 }
 
-div#main {
+.div#main {
   min-height: 70vh;
 }
 </style>
