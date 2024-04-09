@@ -1,5 +1,5 @@
 {
-  "name": "ollamaGen",
+  "name": "openGenAI",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,8 +9,6 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
     "make": "electron-forge make",
     "predeploy": "vite build",
     "deploy": "gh-pages -d dist"
@@ -22,15 +20,14 @@
     "bootstrap-icons": "^1.11.3",
     "corepack": "^0.26.0",
     "dayjs": "^1.11.10",
-    "electron-dev": "^1.0.1",
-    "electron-squirrel-startup": "^1.0.0",
     "gh-pages": "^6.1.1",
     "moment": "^2.30.1",
     "pinia": "^2.1.7",
     "serve": "^14.2.1",
     "text-to-speech-offline": "^1.0.1",
     "vue": "^3.4.15",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "vue3-typer": "^1.0.0"
   },
   "devDependencies": {
     "@capacitor-community/electron": "^5.0.1",

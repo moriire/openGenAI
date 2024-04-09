@@ -27,23 +27,14 @@ export default {
       try {
         const res = await axios.post(`https://moriire-opengenai.hf.space/generate`,
           {
-            //'model': glob.selectedModel,
-            //"messages": [message],
-            "question": msg.value,
-            /*"stream": false,
-            raw": true,
-            "options": {
-              "seed": 101,
-              "temperature": 0,
-              //"raw": true,
-            }*/
-          },
+           "question": msg.value,
+          
+            },
+       
           { signal }
-        );
-
-        //total_duration.value = res.data.context.length / formatTime(res.data.eval_duration);
-        response.value = `${msg.value}:\n\n${res.data.choices[0].message.content}`
-        console.log(res.data.choices[0].message.content)
+        );    
+       
+        response.value = res.data.choices[0].message.content
       } catch (errors) {
         console.log(errors)
       }
@@ -93,9 +84,7 @@ export default {
 
 <template>
   <div class="row justify-content-center .align-items-center" style="height: 80vh;">
-    <div id="gensys" 
-    v-show="response" 
-      class="col-lg-10 col-md-10 col-sm-10 col-xs-12 mx-2 my-2 fs-4">
+    <div id="gensys" v-show="response" class="col-lg-10 col-md-10 col-sm-10 col-xs-12 mx-2 my-2 fs-4">
       {{ response }}
     </div>
   </div>
@@ -142,16 +131,15 @@ export default {
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 textarea {
   outline-color: yellow;
 }
 
 div#gensys {
-  overflow-y:scroll;
+  overflow-y: scroll;
   white-space: pre-line;
   color: yellow !important;
   max-height: 80vh;
 }
-
 </style>

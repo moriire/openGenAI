@@ -11,38 +11,49 @@ import {
 <template>
   <div class="container-fluid">
     <div class="row flex-nowrap">
-      <div class="col-auto col-md-3 col-lg-3 col-xl-2 px-sm-2 px-0 bg-dark">
+      <div class="col-auto col-md-4 col-lg-4 col-xl-3 px-sm-2 px-0 bg-dark">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline">OpenGenAI</span>
+            <span class="fs-2 weight-bold d-none d-sm-inline fst-italic fw-bolder text-decoration-underline">OpenGenAI</span>
+           
           </a>
+          <p class=".lead-2 d-none d-sm-inline">
+          The AI Physician you can trust!!
+         </p>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+           
             <li class="nav-item">
               <RouterLink to="/" class="nav-link align-middle px-0">
-                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                <i class="fs-3 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
               </RouterLink>
 
             </li>
             <li>
               <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                <i class="fs-4 bi-robot"></i> <span class="ms-1 d-none d-sm-inline">ChatBots</span> </a>
-              <ul class="collapse show nav flex-column ms-lg-3" id="submenu1" data-bs-parent="#menu">
+                <i class="fs-3 bi-robot"></i> <span class="ms-1 d-none d-sm-inline">ChatBots</span> </a>
+              <ul class="collapse show nav flex-column ms-lg-5" id="submenu1" data-bs-parent="#menu">
                 <li class="w-100">
-                  <RouterLink to="/chat" class="nav-link px-0">
-                    <span class="d-none d-sm-inline">Physician</span>
+                  <RouterLink to="/gen" class="nav-link px-0">
                     <i class="fs-4 bi-h-square"></i>
+                    <span class="ms-1 d-none d-sm-inline">Physician Instruct</span>
+                    
                   </RouterLink>
                 </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Legal Adviser</span> 2 </a>
+                <li class="w-100">
+                  <RouterLink to="/chat" class="nav-link px-0">
+                    <i class="fs-4 bi-h-square"></i>
+                    <span class="ms-1 d-none d-sm-inline">Physician Chat</span>
+                   
+                  </RouterLink>
                 </li>
+                
               </ul>
             </li>
-            <!--li>
-              <a href="#" class="nav-link px-0 align-middle">
-                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
-            </li>
             <li>
+              <a href="#" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">About</span></a>
+            </li>
+            <!--li>
               <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                 <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
               <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
@@ -75,7 +86,7 @@ import {
             <li>
               <a href="#" class="nav-link px-0 align-middle" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <i class="fs-4 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span> </a>
+                <i class="fs-3 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span> </a>
             </li>
           </ul>
           <hr>
@@ -98,6 +109,7 @@ import {
         </div>
       </div>
       <div class="col .py-3">
+        
         <RouterView />
       </div>
     </div>
@@ -105,11 +117,11 @@ import {
   <div class="container">
 
 
-    <div class="offcanvas offcanvas-end bg-warning" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
+    <div class="offcanvas offcanvas-end bg-dark" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
       id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Settings</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <h2 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Settings</h2>
+        <button type="button" class="btn-close text-light text-warning" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
 
       <div class="offcanvas-body">
