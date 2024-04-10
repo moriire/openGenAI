@@ -11,15 +11,13 @@ import {
 <template>
   <div class="container-fluid">
     <div class="row flex-nowrap">
-      <div class="col-auto col-md-4 col-lg-4 col-xl-3 px-sm-2 px-0 bg-dark">
+      <div class="col-auto col-md-3 col-lg-3 col-xl-2 px-sm-2 px-0 bg-dark">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-2 weight-bold d-none d-sm-inline fst-italic fw-bolder text-decoration-underline">OpenGenAI</span>
-           
+            <i class="d-md-none">OGA</i>
           </a>
-          <p class=".lead-2 d-none d-sm-inline">
-          The AI Physician you can trust!!
-         </p>
+         
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
            
             <li class="nav-item">
@@ -30,19 +28,19 @@ import {
             </li>
             <li>
               <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                <i class="fs-3 bi-robot"></i> <span class="ms-1 d-none d-sm-inline">ChatBots</span> </a>
+                <i class="fs-4 bi-robot"></i> <span class="ms-1 d-none d-sm-inline">ChatBots</span> </a>
               <ul class="collapse show nav flex-column ms-lg-5" id="submenu1" data-bs-parent="#menu">
                 <li class="w-100">
                   <RouterLink to="/gen" class="nav-link px-0">
                     <i class="fs-4 bi-h-square"></i>
-                    <span class="ms-1 d-none d-sm-inline">Physician Instruct</span>
+                    <span class="ms-1 d-none d-sm-inline">Instruct</span>
                     
                   </RouterLink>
                 </li>
                 <li class="w-100">
                   <RouterLink to="/chat" class="nav-link px-0">
                     <i class="fs-4 bi-h-square"></i>
-                    <span class="ms-1 d-none d-sm-inline">Physician Chat</span>
+                    <span class="ms-1 d-none d-sm-inline">Chat</span>
                    
                   </RouterLink>
                 </li>
@@ -108,7 +106,7 @@ import {
           </div-->
         </div>
       </div>
-      <div class="col .py-3">
+      <div class="col .py-3 m-0 p-0">
         
         <RouterView />
       </div>
@@ -188,17 +186,13 @@ import {
 </template>
 
 <style .scoped>
+* {
+  box-sizing: border-box !important;
+}
 body,
 div.cont {
   background-color: black;
   height: 100vh;
 }
 
-.board {
-  height: 70vh;
-}
-
-.nav-link {
-  color: var(--text-warning);
-}
 </style>

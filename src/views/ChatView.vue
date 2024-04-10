@@ -20,7 +20,7 @@ export default {
         const getChat = async () => {
             disable.value = true;
             msg.value = prompt.value;
-            conversations.value.push({ ques: msg.value, resp: '' });
+            conversations.value.push({ 'role':'user',  "content": msg.value });
             prompt.value = "";
             controller = new AbortController();
             const signal = controller.signal;
@@ -30,7 +30,7 @@ export default {
                     {
                         //'model': glob.selectedModel,
                         //"messages": [message],
-                        'question': msg.value,
+                        'question': conversations.value,
                         //"stream": false,
                         //"raw": true,
                         //"options": {
@@ -43,9 +43,10 @@ export default {
                 //total_duration.value = res.data.context.length / formatTime(res.data.eval_duration);
                 //response.value = res.data.message.content
                 response.value = res.data.choices[0].message.content
-                console.log(res.data.choices[0].message.content)
-                conversations.value.findLast(x => x).resp = response.value
-                console.log(conversations.value.findLast(x => x))// = response.value
+                conversations.value.push({ 'role':'system',  "content": response.value });
+               
+                //conversations.value.findLast(x => x).resp = response.value
+                //console.log(conversations.value.findLast(x => x))// = response.value
             } catch (errors) {
                 console.log(errors)
             }
@@ -53,7 +54,7 @@ export default {
                 disable.value = false
             }
         }
-
+        
         const stopGen = () => {
             if (controller) {
                 controller.abort();
@@ -100,18 +101,18 @@ export default {
             class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 position-sticky sticky-bottom .start-50 .bottom-0 .translate-middle-x">
 
             <div v-for="(conv, index) in  conversations" :key="index" class="responsive">
-                <div class="row justify-content-start my-3 mx-2 .input-group">
+                <div class="row justify-content-start my-3 mx-2 .input-group" v-if="conv.role==='system'">
                     <div id="system" class="col-lg-6 col-md-7 col-sm-8 col-xs-9 bg-warning .rounded-pill px-4 py-3">
                         <!--i class="bi bi-clipboard me-2"></i-->
 
-                        {{ conv.ques }}
+                        {{ conv.content }}
                     </div>
                 </div>
-                <div class="row justify-content-end my-3 mx-2 .input-group">
+                <div class="row justify-content-end my-3 mx-2 .input-group" v-else>
                     <div id="user" class="col-lg-6 col-md-7 col-sm-8 col-xs-9 bg-light  .rounded-pill px-4 py-3">
                         <span class="spinner-border spinner-border-sm" aria-hidden="true" v-show="disable">
                         </span>
-                        {{ conv.resp }}
+                        {{ conv.content}}
                     </div>
                 </div>
             </div>

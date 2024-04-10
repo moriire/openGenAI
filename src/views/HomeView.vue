@@ -1,9 +1,11 @@
 <script>
 import { ref } from "vue";
-// ES6
+//import "vue3-typer/dist/vue-typer.css";
 import { Typer } from 'vue3-typer';
 import "vue3-typer/dist/vue-typer.css";
-
+import {
+  RouterLink
+} from 'vue-router'
 export default {
     components: { Typer },
     setup() {
@@ -15,33 +17,55 @@ export default {
 }
 </script>
 <template>
-    <div class="row align-items-center" style="min-height: 100%;">
-        <div class="col-6">
+    <div class="row h-100  justify-content-end align-items-center p-4"
+        style="background-image: url('src/assets/doctor-1.png'); background-position: center; background-size: cover; background-repeat: no-repeat; opacity: 0.7;">
+       
 
-        </div>
-        <div class="col-6 bg-light">
-            <h2 class="bg-light">
-                <Typer :text="['Hello World! I was registered locally!', 'thank you']" erase-style='clear' repeat='Infinity'></Typer>
+        <div class="col-lg-8 col-sm-6 my-5 p-2">
+            <h2 class="text-light">
+                openGenAI
             </h2>
+            <p class="lead-4 text-light">
+                Welcome to AI Physician, a component of openGenAI, your personalized AI-powered medical assistant designed to revolutionize your healthcare experience. AI Physician is here to support you on your journey to better health. What out for other components for Law, Education etc
+            </p>
+            <h2 class="text-warning fw-bold">I am an AI Physician</h2>
+            <p class="h2 text-light">
+                I can <Typer
+                    :text="['provide insights and potential diagnoses and recommendations', 'provide instant medical guidance and support anytime, anywhere.']"
+                    erase-style='clear' repeat='Infinity'></Typer>
+            </p>
+            <div class=" text-center">
+                <RouterLink class="btn btn-warning text-dark" to="/chat">Chat Now!</RouterLink>
+               
+            </div>
         </div>
+
     </div>
 
 </template>
-<style scoped>
+<style>
 .vue-typer {
-  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+    --char-typed-color: var(--bs-light);
+    --char-selected-color: black;
+
+    --char-typed-background-color: transparent;
+    --char-selected-background-color: #ACCEF7;
+
+    --caret-idle-color: black;
+    --caret-typing-color: black;
+    --caret-selecting-color: black;
+    --caret-erasing-color: black;
+    --caret-complete-color: black;
+
+    cursor: default;
+    user-select: none;
 }
 
-.vue-typer .custom.char.typed {
-  color: #607D8B;
-}
-.vue-typer .custom.char.selected {
-  color: #607D8B;
-  background-color: transparent;
-  text-decoration: line-through;
+a {
+    color: var(--bs-warning) !important;
 }
 
-.vue-typer .custom.caret {
-  display: none;
+a:hover {
+    color: #fff !important;
 }
 </style>
