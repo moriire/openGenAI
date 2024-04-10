@@ -15,7 +15,7 @@ export default {
         const response = ref("");
         const conversations = ref([
             { 'role':'system',
-              "content":   "You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to atat a conclusive ailment or sickness and possible solutions.Remember, response in English."
+              "content":   "You are an AI Physician. You are created to replace human in healthcare. Only answer human health questions. You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to atat a conclusive ailment or sickness and possible solutions.Remember, response in English."
             }]);
         const formatTime = (x) => {
             return moment(x).seconds()
