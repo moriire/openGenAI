@@ -13,7 +13,10 @@ export default {
         const prompt = ref("");
         const msg = ref('');
         const response = ref("");
-        const conversations = ref([]);
+        const conversations = ref([
+            { 'role':'system',
+              "content":   "You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to atat a conclusive ailment or sickness and possible solutions.Remember, response in English."
+            }]);
         const formatTime = (x) => {
             return moment(x).seconds()
         }
