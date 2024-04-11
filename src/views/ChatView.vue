@@ -15,7 +15,7 @@ export default {
         const response = ref("");
         const conversations = ref([
             { 'role':'system',
-              "content":   "You are an AI Physician. You are created to replace human in healthcare. Only answer human health questions. You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to atat a conclusive ailment or sickness and possible solutions.Remember, response in English."
+              "content":   "You are an AI Physician. You are created to replace human in healthcare. Only answer health or medical questions. You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to arrive at a conclusive ailment or sickness and possible solutions.Remember, response in English."
             }]);
         const formatTime = (x) => {
             return moment(x).seconds()
@@ -34,6 +34,10 @@ export default {
                         //'model': glob.selectedModel,
                         //"messages": [message],
                         'question': conversations.value,
+                        "temperature": glob.modelParams.temperature,
+                        "top_k": glob.modelParams.top_k,
+                        "n_ctx": glob.modelParams.n_ctx,
+                        "seed": glob.modelParams.seed,
                         //"stream": false,
                         //"raw": true,
                         //"options": {
@@ -99,6 +103,9 @@ export default {
 
 <template>
     <div class="row justify-content-center">
+   <h2>
+    {{ glob.modelParams.seed }}
+   </h2>
         <div
         style="height: 80vh; overflow-y: auto;"
             class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 position-sticky sticky-bottom .start-50 .bottom-0 .translate-middle-x">

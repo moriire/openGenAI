@@ -9,6 +9,7 @@ import {
 </script>
 
 <template>
+  
   <div class="container-fluid">
     <div class="row flex-nowrap">
       <div class="col-auto col-md-3 col-lg-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -113,13 +114,11 @@ import {
     </div>
   </div>
   <div class="container">
-
-
     <div class="offcanvas offcanvas-end bg-dark" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
       id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h2 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Settings</h2>
-        <button type="button" class="btn-close text-light text-warning" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class=" btn-primary btn-close text-light text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
 
       <div class="offcanvas-body">
@@ -139,45 +138,17 @@ import {
               :max="100" :step="5" @change="params.changeModelParams" />
           </div>
           <div class="col-lg-10">
-            <SliderControl v-model="params.modelParams.num_ctx" label="num_ctx" :caliber="params.modelParams.top_p"
-              :min="128" :max="4096" :step="128" @change="params.changeModelParams" />
+            <SliderControl v-model="params.modelParams.n_ctx" label="num_ctx" :caliber="params.modelParams.n_ctx"
+              :min="126" :max="8192" :step="126" @change="params.changeModelParams" />
           </div>
 
           <div class="col-lg-10">
-            <SliderControl v-model="params.modelParams.repeat_penalty" label="repeat_penalty"
-              :caliber="params.modelParams.repeat_penalty" :min="0" :max="2.0" :step="0.1"
+            <SliderControl v-model="params.modelParams.seed" label="seed"
+              :caliber="params.modelParams.seed"  :min="0" :max="100"
               @change="params.changeModelParams" />
           </div>
-          <div class="col-lg-10">
-            <SliderControl v-model="params.modelParams.seed" label="Seed" :caliber="params.modelParams.seed"
-              @change="params.changeModelParams" :min="0" :max="101" :step="1" />
-          </div>
-
+        
         </div>
-        <!--ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <RouterLink to="/" class="nav-link active" aria-current="page">
-              Home
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink to="/settings" class="nav-link">
-              Settings
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink to="/models" class="nav-link">
-              Models
-            </RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink to="/voice" class="nav-link">
-              Voice
-            </RouterLink>
-          </li>
-          
-        </ul-->
-
       </div>
     </div>
 
@@ -186,6 +157,9 @@ import {
 </template>
 
 <style .scoped>
+.btn-close{
+--bs-btn-close-color: white;
+}
 * {
   box-sizing: border-box !important;
 }

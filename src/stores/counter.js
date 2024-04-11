@@ -5,10 +5,10 @@ export const useVoiceSettingsStore = defineStore('voice', () => {
    
  //model parameter settings
 
- const temperature = computed(() => getParam('modelParams', 'temperature') || 0.7)
+ const temperature = computed(() => getParam('modelparams', 'temperature') || 0.7)
  const top_p = computed(() => getParam('modelparams', 'top_p') || 1)
  const top_k = computed(() => getParam('modelparams', 'top_k') || 1)
- const num_ctx = computed(() => getParam('modelparams', 'num_ctx'))
+ const n_ctx = computed(() => getParam('modelparams', 'n_ctx'))
  const seed = computed(() => getParam('modelparams', 'seed') || 101)
  const repeat_penalty = computed(() => getParam('modelparams', 'repeat_penalty') || 1.1)
  // end parameter
@@ -18,7 +18,7 @@ export const useVoiceSettingsStore = defineStore('voice', () => {
   const rate = computed(() => getParam('voice', 'rate') || 1)
   const pitch = computed(() => getParam('voice', 'pitch') || 1)
   const model = computed(() => getParam('model', 'model'))
-  const modelParams = reactive({temperature: temperature.value, seed: seed.value, top_k: top_k.value, top_p: top_p.value}) // JSON.parse(localStorage.getItem('modelparams'))
+  const modelParams = reactive({temperature: temperature.value, seed: seed.value, top_k: top_k.value, top_p: top_p.value, n_ctx: n_ctx.value}) // JSON.parse(localStorage.getItem('modelparams'))
   const voiceParams = reactive({ vol: volume.value, rate: rate.value, pitch: pitch.value})
 
  //Model settings
@@ -56,7 +56,7 @@ export const useVoiceSettingsStore = defineStore('voice', () => {
   temperature,
   top_p,
   top_k,
-  num_ctx,
+  n_ctx,
   repeat_penalty,
   seed
   }

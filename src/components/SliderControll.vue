@@ -69,7 +69,7 @@ watchEffect(() => {
 </script>
 <template>
   <div class="form-group">
-    <label :for="label" class="text-light mb-2 h2">{{ label }} : {{ caliber }}</label>
+    <label :for="label" class="text-light my-2">{{ label }} : {{ caliber }}</label>
     <input
      :id="label"
       ref="slider"
@@ -79,7 +79,7 @@ watchEffect(() => {
       :min="min"
       :max="max"
       :step="step"
-      class="form-control"
+      class=".form-control"
     />
     <!--input
       :value="sliderValue"
@@ -98,18 +98,19 @@ input[type="range"] {
   appearance: none;
   background: transparent;
   cursor: pointer;
+  width: 100%;
 }
                         /***** Track Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
   background: var(--bs-light);
-  height: 0.5rem;
+  height: 0.3rem;
 }
 
 /******** Firefox ********/
 input[type="range"]::-moz-range-track {
   background: var(--bs-light);
-  height: 0.5rem;
+  height: 0.3rem;
 }
 /***** Thumb Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
@@ -119,7 +120,7 @@ input[type="range"]::-webkit-slider-thumb {
    margin-top: -12px; /* Centers thumb on the track */
    background-color: var(--bs-yellow);
    height: 2rem;
-   width: 1rem;    
+   width: .5rem;    
 }
 /***** Thumb Styles *****/
 /***** Firefox *****/
@@ -128,7 +129,7 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 0; /*Removes default border-radius that FF applies*/
     background-color: var(--bs-yellow);
     height: 2rem;
-    width: 1rem;
+    width: .5rem;
 }
 /***** Focus Styles *****/
 /* Removes default focus */
@@ -138,15 +139,15 @@ input[type="range"]:focus {
 
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]:focus::-webkit-slider-thumb {
-  border: 1px solid var(--bs-yellow);
-  outline: 3px solid var(--bs-yellow);
-  outline-offset: 0.125rem;
+  border: 1px solid var(--bs-warning);
+  outline: 2px solid var(--bs-warning);
+  outline-offset: 0.05rem;
 }
 
 /******** Firefox ********/
 input[type="range"]:focus::-moz-range-thumb {
-  border: 1px solid var(--bs-yellow);
-  outline: 3px solid var(--bs-yellow);
-  outline-offset: 0.125rem;     
+  border: 1px solid var(--bs-warning);
+  outline: 2px solid var(--bs-warning);
+  outline-offset: 0.05rem;     
 }
 </style>
