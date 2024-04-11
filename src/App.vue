@@ -2,6 +2,9 @@
 import SliderControl from "@/components/SliderControll.vue"
 import { useVoiceSettingsStore } from '@/stores/counter';
 const params = useVoiceSettingsStore();
+const reset = ()=>{
+  localStorage.clear()
+}
 import {
   RouterLink,
   RouterView
@@ -85,7 +88,7 @@ import {
             <li>
               <a href="#" class="nav-link px-0 align-middle" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <i class="fs-3 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span> </a>
+                <i class="fs-3 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings </span> </a>
             </li>
           </ul>
           <hr>
@@ -117,32 +120,32 @@ import {
     <div class="offcanvas offcanvas-end bg-dark" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
       id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h2 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Settings</h2>
+        <h2 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Settings <span><button class="btn btn-sm btn-outline-warning" @click="reset">reset</button></span></h2>
         <button type="button" class=" btn-primary btn-close text-light text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
 
       <div class="offcanvas-body">
-        <div class="row my-2 justify-content-center">
-          <div class="col-lg-10 p-2">
+        <div class="row justify-content-center">
+          <div class="col-lg-10 my-2">
             <SliderControl v-model="params.modelParams.temperature" label="Temperature" :min="0" :max="1" :step=".1"
               :caliber="params.modelParams.temperature" @change="params.changeModelParams" />
           </div>
 
-          <div class="col-lg-10 p-2">
+          <div class="col-lg-10 my-2">
             <SliderControl v-model="params.modelParams.top_p" label="Top_p" :caliber="params.modelParams.top_p" :min="0"
               :max="1.0" :step="0.05" @change="params.changeModelParams" />
           </div>
 
-          <div class="col-lg-10">
+          <div class="col-lg-10 my-2">
             <SliderControl v-model="params.modelParams.top_k" label="Top_k" :caliber="params.modelParams.top_k" :min="0"
               :max="100" :step="5" @change="params.changeModelParams" />
           </div>
-          <div class="col-lg-10">
+          <div class="col-lg-10 my-2">
             <SliderControl v-model="params.modelParams.n_ctx" label="num_ctx" :caliber="params.modelParams.n_ctx"
               :min="126" :max="8192" :step="126" @change="params.changeModelParams" />
           </div>
 
-          <div class="col-lg-10">
+          <div class="col-lg-10 my-2">
             <SliderControl v-model="params.modelParams.seed" label="seed"
               :caliber="params.modelParams.seed"  :min="0" :max="100"
               @change="params.changeModelParams" />
