@@ -103,9 +103,6 @@ export default {
 
 <template>
     <div class="row justify-content-center">
-   <h2>
-    {{ glob.modelParams.seed }}
-   </h2>
         <div
         style="height: 80vh; overflow-y: auto;"
             class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 position-sticky sticky-bottom .start-50 .bottom-0 .translate-middle-x">

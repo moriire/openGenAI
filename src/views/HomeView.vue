@@ -9,10 +9,7 @@ import {
 export default {
     components: { Typer },
     setup() {
-        const tales = ref("hello");
-        return {
-            tales
-        }
+        
     }
 }
 </script>
@@ -31,7 +28,7 @@ export default {
             <h2 class="text-warning fw-bold">I am an AI Physician</h2>
             <p class="h2 text-light">
                 I can <Typer
-                    :text="['provide insights and potential diagnoses and recommendations', 'provide instant medical guidance and support anytime, anywhere.']"
+                    :text="['provide insights, diagnoses and recommendations', 'provide instant medical guidance anytime, anywhere.']"
                     erase-style='clear' repeat='Infinity'></Typer>
             </p>
             <div class=" text-center">

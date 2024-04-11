@@ -16,7 +16,7 @@ import {
   <div class="container-fluid">
     <div class="row flex-nowrap">
       <div class="col-auto col-md-3 col-lg-3 col-xl-2 px-sm-2 px-0 bg-dark">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-2 pt-2 text-white min-vh-100">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-2 weight-bold d-none d-sm-inline fst-italic fw-bolder text-decoration-underline">OpenGenAI</span>
             <i class="d-md-none">OGA</i>
@@ -121,7 +121,9 @@ import {
       id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
         <h2 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Settings <span><button class="btn btn-sm btn-outline-warning" @click="reset">reset</button></span></h2>
-        <button type="button" class=" btn-primary btn-close text-light text-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close close" data-bs-dismiss="offcanvas" aria-label="Close" >
+        
+        </button>
       </div>
 
       <div class="offcanvas-body">
@@ -162,6 +164,7 @@ import {
 <style .scoped>
 .btn-close{
 --bs-btn-close-color: white;
+color: white !important;
 }
 * {
   box-sizing: border-box !important;
