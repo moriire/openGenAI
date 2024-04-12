@@ -5,10 +5,19 @@ import ChatView from '../views/ChatView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ModelsView from '../views/ModelsView.vue'
 import VoiceView from '../views/VoiceView.vue'
+import { useAuthStore } from '@/stores/auth';
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   //history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/login',
+      component: () => import('@/views/auth/LoginView.vue'),
+  },
+  {
+      path: '/register',
+      component: () => import('@/views/auth/RegisterView.vue'),
+  },
     {
       path: '/',
       name: 'home',
@@ -49,5 +58,16 @@ const router = createRouter({
     }
   ]
 })
+
+
+// Route guard
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  if (to.meta.requiresAuth && !authStore.token) {
+      next('/login');
+  } else {
+      next();
+  }
+});
 
 export default router
