@@ -25,7 +25,7 @@ export default {
       //const message = { role: 'user', content: msg.value };
 
       try {
-        const res = await axios.post(`https://moriire-opengenai.hf.space/generate`,
+        const res = await axios.post(`https://moriire-opengenai.hf.space/llm/generate`,
           {
             "question": msg.value,
 
