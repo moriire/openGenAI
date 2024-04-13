@@ -22,9 +22,9 @@ export const useAuthStore = defineStore('auth', {
                 throw error;
             }
         },
-        async register(username, password) {
+        async register(email, password) {
             try {
-                const response = await axios.post('/api/register', { username, password });
+                const response = await axios.post('https://moriire-opengenai.hf.space/user/users/', { email, password });
                 const { token, user } = response.data;
                 this.token = token;
                 this.user = user;

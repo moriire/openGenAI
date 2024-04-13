@@ -7,10 +7,10 @@
                 hello
             </div>
             <div class="col-lg-6">
-                <h2>Login</h2>
-                <form @submit.prevent="handleLogin">
+                <h2>Sign up</h2>
+                <form @submit.prevent="handleSignup">
                     <div class="form-group mb-3">
-                        <input class="form-control" v-model="credential.username" type="username" placeholder="username"
+                        <input class="form-control" v-model="credential.email" type="email" placeholder="email"
                             required />
                     </div>
                     <div class="form-group mb-3">
@@ -33,27 +33,27 @@ import { ref, reactive } from "vue"
 export default {
     data() {
         return {
-            username: '',
+            email: '',
             password: '',
         };
     },
     setup() {
         const credential = reactive({
-            username: '',
+            email: '',
             password: '',
         });
         const authStore = useAuthStore();
 
-        const handleLogin = async () => {
+        const handleSignup = async () => {
             try {
-                await authStore.login(credential.username, credential.password);
+                await authStore.register(credential.email, credential.password);
                 // Redirect to a protected route or home page
             } catch (error) {
-                console.error('Login error:', error);
+                console.error('Signup error:', error);
             }
         };
 
-        return { credential, handleLogin };
+        return { credential, handleSignup };
     },
 };
 </script>
