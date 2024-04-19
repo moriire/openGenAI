@@ -11,20 +11,22 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async login(username, password) {
             try {
-                const response = await axios.post(`https://moriire-opengenai.hf.space/user/login`, { username, password });
-                const { token, user } = response.data;
-                this.token = token;
+                const response = await axios.post(`https://moriire-opengenai.hf.space/auth/jwt/login`, { username, password });
+		alert(1)
+                const { access_token } = response.data;
+                this.token = access_token;
                 this.user = user;
                 localStorage.setItem('jwtToken', token);
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             } catch (error) {
+		alert(error);
                 console.error('Login failed:', error);
                 throw error;
             }
         },
         async register(email, password) {
             try {
-                const response = await axios.post('https://moriire-opengenai.hf.space/user/users/', { email, password });
+                const response = await axios.post('https://moriire-opengenai.hf.space/auth/register', { email, password });
                 const { token, user } = response.data;
                 this.token = token;
                 this.user = user;
@@ -41,5 +43,5 @@ export const useAuthStore = defineStore('auth', {
             localStorage.removeItem('jwtToken');
             delete axios.defaults.headers.common['Authorization'];
         },
-    },
+   }
 });

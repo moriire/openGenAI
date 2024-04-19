@@ -26,12 +26,18 @@ const router = createRouter({
     {
       path: '/gen',
       name: 'gen',
-      component: GenerativeView
+      component: GenerativeView,
+      meta: {
+        requiresAuth: true                   
+	}
     },
     {
       path: '/chat',
       name: 'chat',
-      component: ChatView
+      component: ChatView,
+      meta: {
+	requiresAuth: true
+	}
     },
     {
       path: '/settings',
@@ -65,6 +71,7 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   if (to.meta.requiresAuth && !authStore.token) {
       next('/login');
+	//next('/login');
   } else {
       next();
   }
