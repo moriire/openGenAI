@@ -9,9 +9,9 @@
                 <h2 class="text-light text-center">Login {{ credential }}
 
 </h2>
-                <form @submit.prevent="shAlert">
+                <form @submit.prevent="handleLogin">
                     <div class="form-group mb-3 p-3">
-                        <input class="form-control" v-model="credential.email" type="email" placeholder="Email"
+                        <input class="form-control" v-model="credential.username" type="email" placeholder="Email"
                             hrequired />
                     </div>
                     <div class="form-group mb-3 p-3">
@@ -19,7 +19,7 @@
                             hrequired />
                     </div>
                     <div class="form-group text-center d-md-block d-grid mb-3 p-3">
-                        <button type="submit" class="btn btn-outline-warning" @click="handleLogin" >Login</button>
+                        <button type="submit" class="btn btn-outline-warning" >Login</button>
                     </div>
                 </form>
             </div>
@@ -48,12 +48,11 @@ export default {
 
         const handleLogin = async () => {
             try {
-                await authStore.login(...credential);
-		shAlert();
+                await authStore.login(credential.username, credential.password);
                 // Redirect to a protected route or home page
 		shAlert();
             } catch (error) {
-                console.error('Signup error:', error);
+                console.error('Login error:', error);
             }
         };
 

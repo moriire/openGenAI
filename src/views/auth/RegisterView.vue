@@ -29,12 +29,6 @@
 import { useAuthStore } from '@/stores/auth';
 import { ref, reactive } from "vue"
 export default {
-    data() {
-        return {
-            email: '',
-            password: '',
-        };
-    },
     setup() {
         const credential = reactive({
             email: '',
@@ -44,7 +38,7 @@ export default {
 
         const handleSignup = async () => {
             try {
-                await authStore.register(...credential.username, credential.password);
+                await authStore.register(credential.email, credential.password);
                 // Redirect to a protected route or home page
             } catch (error) {
                 console.error('Signup error:', error);
