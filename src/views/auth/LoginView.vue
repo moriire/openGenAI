@@ -9,19 +9,28 @@
 
 </h2>
                 <form @submit.prevent="handleLogin">
-                    <div class="form-group mb-3 p-3">
+                    <div class="form-group m-3 p-3">
                         <input class="form-control" v-model="credential.username" type="email" placeholder="Email"
                             required />
                     </div>
-                    <div class="form-group mb-3 p-3">
+                    <div class="form-group m-3 p-3">
                         <input class="form-control" v-model="credential.password" type="password" placeholder="Password"
                             required />
+                        <div class="justify-content-end d-flex">
+                            <a href="#" class="btn btn-link text-decoration-none">forgot password?</a>
+                        </div>
+                           
                     </div>
-                    <div class="form-group text-center d-md-block d-grid mb-3 p-3">
+                    <div class="form-group text-center d-block d-grid m-3 p-3">
                         <button type="submit" class="btn btn-outline-warning" >Login</button>
                     </div>
                 </form>
+                <div class="text-light text-center">
+                    Don't have an account yet?
+                    <a href="" class="btn btn-link text-decoration-none">Sign up</a>
+                </div>
             </div>
+
         </div>
     </div>
 
@@ -30,6 +39,7 @@
 <script>
 import { useAuthStore } from '@/stores/auth';
 import { ref, reactive } from "vue"
+
 export default {
     setup() {
 
