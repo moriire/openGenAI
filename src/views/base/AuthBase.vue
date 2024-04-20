@@ -81,4 +81,20 @@ div.cont {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+.vue-typer {
+    --char-typed-color: var(--bs-light);
+    --char-selected-color: black;
+
+    --char-typed-background-color: transparent;
+    --char-selected-background-color: #ACCEF7;
+
+    --caret-idle-color: black;
+    --caret-typing-color: black;
+    --caret-selecting-color: black;
+    --caret-erasing-color: black;
+    --caret-complete-color: black;
+
+    cursor: default;
+    user-select: none;
+}
 </style>

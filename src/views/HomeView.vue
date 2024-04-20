@@ -1,5 +1,6 @@
 <script>
 import { ref, onMounted } from "vue";
+import "vue3-typer/dist/vue-typer.css";
 //import "vue3-typer/dist/vue-typer.css";
 import { Typer } from 'vue3-typer';
 import "vue3-typer/dist/vue-typer.css";
