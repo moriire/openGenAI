@@ -4,19 +4,18 @@
             <!--div class="col-lg-6">
                 hello
             </div-->
-<button @click="handleLogin" class="btn btn-light" >alert</button>
             <div class="m-2 col-lg-6 col-sm-8 col-xs-8 bg-dark py-5">
-                <h2 class="text-light text-center">Login {{ credential }}
+                <h2 class="text-light text-center">Login
 
 </h2>
                 <form @submit.prevent="handleLogin">
                     <div class="form-group mb-3 p-3">
                         <input class="form-control" v-model="credential.username" type="email" placeholder="Email"
-                            hrequired />
+                            required />
                     </div>
                     <div class="form-group mb-3 p-3">
                         <input class="form-control" v-model="credential.password" type="password" placeholder="Password"
-                            hrequired />
+                            required />
                     </div>
                     <div class="form-group text-center d-md-block d-grid mb-3 p-3">
                         <button type="submit" class="btn btn-outline-warning" >Login</button>

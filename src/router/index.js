@@ -28,7 +28,7 @@ const router = createRouter({
       name: 'gen',
       component: GenerativeView,
       meta: {
-        //requiresAuth: true                   
+        requiresAuth: true                   
 	}
     },
     {
@@ -36,7 +36,7 @@ const router = createRouter({
       name: 'chat',
       component: ChatView,
       meta: {
-	  //requiresAuth: true
+	    requiresAuth: true
 	}
     },
     {

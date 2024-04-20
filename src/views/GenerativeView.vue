@@ -3,10 +3,16 @@ import axios from 'axios';
 import moment from 'moment';
 import TTS from 'text-to-speech-offline';
 import { useVoiceSettingsStore } from '@/stores/counter';
+import { useAuthStore } from "@/stores/auth";
 import { ref } from 'vue';
+import { useRouter} from 'vue-router';
+
 export default {
   setup() {
     let controller;
+    const router = useRouter();
+    const user = useAuthStore();
+    axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
     const glob = useVoiceSettingsStore();
     const disable = ref(false);
     const total_duration = ref(0);
@@ -42,6 +48,10 @@ export default {
         response.value = res.data.choices[0].message.content
       } catch (errors) {
         console.log(errors)
+        if (errors.response.status===401){
+          user.logout()
+          router.push('/logim')
+        }
       }
       finally {
         disable.value = false

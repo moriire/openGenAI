@@ -9,20 +9,22 @@ export const useAuthStore = defineStore('auth', {
         token: localStorage.getItem('jwtToken') || null,
     }),
     actions: {
-        async login(username, password) {
+        async login(email, password) {
             try {
                 const response = await axios.post(`https://moriire-opengenai.hf.space/auth/jwt/login`,
-                JSON.stringify({ "username": username, "password": password}),
+                `username=${email}&password=${password}`,
+                //JSON.stringify({ "username": email, "password": password}),
             {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json',
                   }
                 });
                 const { access_token } = response.data;
                 this.token = access_token;
                 //this.user = user;
                 localStorage.setItem('jwtToken', this.token);
-                //axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+                axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
             } catch (error) {
 		alert(error);
                 console.error('Login failed:', error);

@@ -1,10 +1,12 @@
 import { ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
+//import axios from 'axios';
+//import { useAuthStore } from './auth';
 
 export const useVoiceSettingsStore = defineStore('voice', () => {
    
  //model parameter settings
-
+//const user = useAuthStore();
  const temperature = computed(() => getParam('modelparams', 'temperature') || 0.7)
  const top_p = computed(() => getParam('modelparams', 'top_p') || 1)
  const top_k = computed(() => getParam('modelparams', 'top_k') || 1)

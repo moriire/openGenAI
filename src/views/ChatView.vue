@@ -3,10 +3,14 @@ import axios from 'axios';
 import moment from 'moment';
 import TTS from 'text-to-speech-offline';
 import { useVoiceSettingsStore } from '@/stores/counter';
+import { useAuthStore } from "@/stores/auth";
+
 import { ref } from 'vue';
 export default {
     setup() {
         let controller;
+        const user = useAuthStore();
+        axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
         const glob = useVoiceSettingsStore();
         const disable = ref(false);
         const total_duration = ref(0);
@@ -27,6 +31,7 @@ export default {
             prompt.value = "";
             controller = new AbortController();
             const signal = controller.signal;
+           
             //const message = { role: 'user', content: msg.value };
             try {
                 const res = await axios.post(`https://moriire-opengenai.hf.space/llm/chat/`,
