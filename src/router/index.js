@@ -1,43 +1,51 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import GenerativeView from '../views/GenerativeView.vue'
 import ChatView from '../views/ChatView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ModelsView from '../views/ModelsView.vue'
 import VoiceView from '../views/VoiceView.vue'
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from '@/stores/auth'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   //history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/login',
-      component: () => import('@/views/auth/LoginView.vue'),
-  },
-  {
-      path: '/register',
-      component: () => import('@/views/auth/RegisterView.vue'),
-  },
+      component: () => import('@/views/base/AuthBase.vue'),
+      path: '/auth',
+      children: [
+        {
+          path: 'login',
+          alias: '/',
+          component: () => import('@/views/auth/LoginView.vue')
+        },
+
+        {
+          path: 'register',
+          component: () => import('@/views/auth/RegisterView.vue')
+        }
+      ]
+    },
     {
       path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/gen',
-      name: 'gen',
-      component: GenerativeView,
-      meta: {
-        requiresAuth: true                   
-	}
-    },
-    {
-      path: '/chat',
-      name: 'chat',
-      component: ChatView,
-      meta: {
-	    requiresAuth: true
-	}
+      component: () => import('@/views/base/AuthBase.vue'),
+      children: [
+        {
+          path: '/gen',
+          name: 'gen',
+          component: GenerativeView,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/chat',
+          name: 'chat',
+          component: ChatView,
+          meta: {
+            requiresAuth: true
+          }
+        },
+      ]
     },
     {
       path: '/settings',
@@ -65,16 +73,15 @@ const router = createRouter({
   ]
 })
 
-
 // Route guard
 router.beforeEach((to, from, next) => {
-  const authStore = useAuthStore();
+  const authStore = useAuthStore()
   if (to.meta.requiresAuth && !authStore.token) {
-      next('/login');
-	//next('/login');
+    next('/login')
+    //next('/login');
   } else {
-      next();
+    next()
   }
-});
+})
 
 export default router

@@ -1,14 +1,10 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center vh-100 align-items-center">
-            <!--div class="col-lg-6">
-                hello
-            </div-->
-            <div class="m-2 col-lg-6 col-sm-8 col-xs-8 bg-dark py-5">
+   
+            <!--div class="m-2 col-lg-6 col-sm-8 col-xs-8 bg-dark py-5"-->
                 <h2 class="text-light text-center">Sign up</h2>
-                <form @submit.prevent="handleLogin">
+                <form @submit.prevent="handleSignup">
                     <div class="form-group m-3 p-3">
-                        <input class="form-control" v-model="credential.username" type="email" placeholder="Email"
+                        <input class="form-control" v-model="credential.email" type="email" placeholder="Email"
                             required />
                     </div>
                     <div class="form-group m-3 p-3">
@@ -25,18 +21,17 @@
                 </form>
                 <div class="text-light text-center">
                     You already have an account?
-                    <RouterLink to="/login" class="btn btn-link text-decoration-none">Login</RouterLink>
+                    <RouterLink to="/auth/login" class="btn btn-link text-warning text-decoration-none">Login</RouterLink>
                 </div>
-            </div>
+            <!--/div-->
 
-        </div>
-    </div>
+        
 
 </template>
 
 <script>
 import { useAuthStore } from '@/stores/auth';
-import { ref, reactive } from "vue"
+import { reactive } from "vue"
 import {
   RouterLink,
 } from 'vue-router';

@@ -1,10 +1,11 @@
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 //import "vue3-typer/dist/vue-typer.css";
 import { Typer } from 'vue3-typer';
 import "vue3-typer/dist/vue-typer.css";
 import {
-  RouterLink
+  RouterLink,
+  //useRouter
 } from 'vue-router'
 export default {
     components: { Typer },
