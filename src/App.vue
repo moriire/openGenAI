@@ -10,3 +10,14 @@ import {
         <RouterView />
    
 </template>
+<style .scoped>
+* {
+    box-sizing: border-box !important;
+}
+
+body,
+div.cont {
+    background-color: black;
+    height: 100vh;
+}
+</style>

@@ -30,7 +30,7 @@ const reset = () => {
                     <h2 class="text-center text-white my-4">
                         open<span class="text-warning">GenAI</span>
                     </h2>
-                    <p class="h2 text-light">
+                    <p class="h3 text-light text-center">
                         <Typer
                             :text="['I am openGenAI', 'I am created to help Human', 'I can be your Personal Assistant', 'Watch out for more useful tools']"
                             erase-style='clear' repeat='Infinity'></Typer>
@@ -46,20 +46,10 @@ const reset = () => {
 
 </template>
 
-<style .scoped>
+<style scoped>
 .btn-close {
     --bs-btn-close-color: white;
     color: white !important;
-}
-
-* {
-    box-sizing: border-box !important;
-}
-
-body,
-div.cont {
-    background-color: black;
-    height: 100vh;
 }
 
 /* width */
