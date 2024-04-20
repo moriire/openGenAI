@@ -39,7 +39,6 @@ export default {
             "top_k": glob.modelParams.top_k,
             "n_ctx": glob.modelParams.n_ctx,
             "seed": glob.modelParams.seed,
-
           },
 
           { signal }
@@ -50,7 +49,7 @@ export default {
         console.log(errors)
         if (errors.response.status===401){
           user.logout()
-          router.push('/logim')
+          router.push('/auth/logim')
         }
       }
       finally {

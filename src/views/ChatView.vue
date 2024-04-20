@@ -4,12 +4,14 @@ import moment from 'moment';
 import TTS from 'text-to-speech-offline';
 import { useVoiceSettingsStore } from '@/stores/counter';
 import { useAuthStore } from "@/stores/auth";
-
 import { ref } from 'vue';
+import { useRouter} from 'vue-router';
+
 export default {
     setup() {
         let controller;
         const user = useAuthStore();
+        const router = useRouter();
         axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
         const glob = useVoiceSettingsStore();
         const disable = ref(false);
@@ -18,8 +20,9 @@ export default {
         const msg = ref('');
         const response = ref("");
         const conversations = ref([
-            { 'role':'system',
-              "content":   "You are an AI Physician. You are created to replace human in healthcare. Only answer health or medical questions. You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to arrive at a conclusive ailment or sickness and possible solutions.Remember, response in English."
+            {
+                'role': 'system',
+                "content": "You are an AI Physician. You are created to replace human in healthcare. Only answer health or medical questions. You are a helpful medical AI chat assistant. Help as much as you can.Also continuously ask for possible symptoms in order to arrive at a conclusive ailment or sickness and possible solutions.Remember, response in English."
             }]);
         const formatTime = (x) => {
             return moment(x).seconds()
@@ -27,11 +30,11 @@ export default {
         const getChat = async () => {
             disable.value = true;
             msg.value = prompt.value;
-            conversations.value.push({ 'role':'user',  "content": msg.value });
+            conversations.value.push({ 'role': 'user', "content": msg.value });
             prompt.value = "";
             controller = new AbortController();
             const signal = controller.signal;
-           
+
             //const message = { role: 'user', content: msg.value };
             try {
                 const res = await axios.post(`https://moriire-opengenai.hf.space/llm/chat/`,
@@ -46,8 +49,8 @@ export default {
                         //"stream": false,
                         //"raw": true,
                         //"options": {
-                            //"seed": 101,
-                            //"temperature": 0
+                        //"seed": 101,
+                        //"temperature": 0
                         //}
                     },
                     { signal }
@@ -55,18 +58,22 @@ export default {
                 //total_duration.value = res.data.context.length / formatTime(res.data.eval_duration);
                 //response.value = res.data.message.content
                 response.value = res.data.choices[0].message.content
-                conversations.value.push({ 'role':'system',  "content": response.value });
-               
+                conversations.value.push({ 'role': 'system', "content": response.value });
+
                 //conversations.value.findLast(x => x).resp = response.value
                 //console.log(conversations.value.findLast(x => x))// = response.value
             } catch (errors) {
                 console.log(errors)
+                if (errors.response.status === 401) {
+                    user.logout()
+                    router.push('/auth/logim')
+                }
             }
             finally {
                 disable.value = false
             }
         }
-        
+
         const stopGen = () => {
             if (controller) {
                 controller.abort();
@@ -108,12 +115,11 @@ export default {
 
 <template>
     <div class="row justify-content-center">
-        <div
-        style="height: 80vh; overflow-y: auto;"
+        <div style="height: 80vh; overflow-y: auto;"
             class="col-lg-10 col-md-10 col-sm-10 col-xs-12 .mx-3 my-2 position-sticky sticky-bottom .start-50 .bottom-0 .translate-middle-x">
 
             <div v-for="(conv, index) in  conversations.slice(1,)" :key="index" class="responsive">
-                <div class="row justify-content-start my-3 mx-2 .input-group" v-if="conv.role==='system'">
+                <div class="row justify-content-start my-3 mx-2 .input-group" v-if="conv.role === 'system'">
                     <div id="system" class="col-lg-6 col-md-7 col-sm-8 col-xs-9 bg-warning .rounded-pill px-4 py-3">
                         <!--i class="bi bi-clipboard me-2"></i-->
 
@@ -124,7 +130,7 @@ export default {
                     <div id="user" class="col-lg-6 col-md-7 col-sm-8 col-xs-9 bg-light  .rounded-pill px-4 py-3">
                         <span class="spinner-border spinner-border-sm" aria-hidden="true" v-show="disable">
                         </span>
-                        {{ conv.content}}
+                        {{ conv.content }}
                     </div>
                 </div>
             </div>
@@ -156,6 +162,6 @@ textarea {
     min-height: min-content;
     max-width: max-content;
     min-width: min-content;
-    
+
 }
 </style>

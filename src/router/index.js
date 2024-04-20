@@ -27,7 +27,7 @@ const router = createRouter({
     },
     {
       path: '/',
-      component: () => import('@/views/base/AuthBase.vue'),
+      component: () => import('@/views/base/PageBase.vue'),
       children: [
         {
           path: '/gen',
