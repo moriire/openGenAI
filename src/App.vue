@@ -1,14 +1,20 @@
 <script setup>
 import SliderControl from "@/components/SliderControll.vue"
 import { useVoiceSettingsStore } from '@/stores/counter';
+import axios from 'axios';
+import { useAuthStore } from "@/stores/auth";
+import { useRouter} from 'vue-router';
 const params = useVoiceSettingsStore();
-const reset = ()=>{
-  localStorage.clear()
-}
 import {
   RouterLink,
   RouterView
 } from 'vue-router'
+const router = useRouter();
+    const user = useAuthStore();
+    axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
+const reset = ()=>{
+  localStorage.clear()
+}
 </script>
 
 <template>
@@ -92,22 +98,22 @@ import {
             </li>
           </ul>
           <hr>
-          <!--div class="dropdown pb-4">
+          <div class="dropdown pb-4">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-              <span class="d-none d-sm-inline mx-1">loser</span>
+              <img src="/src/assets/dummy.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+              <span class="d-none d-sm-inline mx-1">Loggedin</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <!--li><a class="dropdown-item" href="#">New project...</a></li>
               <li><a class="dropdown-item" href="#" >Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li-->
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
+              <li><a class="dropdown-item" type="button" @click="user.logout()">Sign out</a></li>
             </ul>
-          </div-->
+          </div>
         </div>
       </div>
       <div class="col .py-3 m-0 p-0">

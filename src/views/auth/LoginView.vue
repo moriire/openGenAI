@@ -27,7 +27,7 @@
                 </form>
                 <div class="text-light text-center">
                     Don't have an account yet?
-                    <a href="" class="btn btn-link text-decoration-none">Sign up</a>
+                    <RouterLink to="/register" class="btn btn-link text-decoration-none">Sign up</RouterLink>
                 </div>
             </div>
 
@@ -39,8 +39,13 @@
 <script>
 import { useAuthStore } from '@/stores/auth';
 import { ref, reactive } from "vue"
+import {
+  RouterLink,
+  RouterView
+} from 'vue-router';
 
 export default {
+    components:[RouterLink],
     setup() {
 
 	const shAlert = () => {
