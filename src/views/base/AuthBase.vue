@@ -30,9 +30,9 @@ const reset = () => {
                     <h2 class="text-center text-white my-4">
                         open<span class="text-warning">GenAI</span>
                     </h2>
-                    <p class="h3 text-light text-center">
+                    <p class="h4 text-light text-center">
                         <Typer
-                            :text="['I am openGenAI', 'I am created to help Human', 'I can be your Personal Assistant', 'Watch out for more useful tools']"
+                            :text="['I am openGenAI', 'I was created to help Human', 'I can be your Personal Assistant', 'Watch out for more useful tools']"
                             erase-style='clear' repeat='Infinity'></Typer>
                     </p>
                 </div>
