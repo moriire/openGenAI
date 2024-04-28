@@ -20,4 +20,7 @@ div.cont {
     background-color: black;
     height: 100vh;
 }
+a.nav-link {
+  color: var(--bs-warning)
+}
 </style>
