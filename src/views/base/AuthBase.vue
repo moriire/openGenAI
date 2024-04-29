@@ -23,7 +23,7 @@ const reset = () => {
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-lg-6 .bg-light d-md-block d-none"
-                style="background-image:url(src/assets/ai-2.png); height: 90vh; background-repeat: no-repeat; background-position: center; background-size: cover;" >
+                style="background-image:url(ai-2.png); height: 90vh; background-repeat: no-repeat; background-position: center; background-size: cover;" >
             </div>
             <div class="col-lg-6 row h-100">
                 <div>
