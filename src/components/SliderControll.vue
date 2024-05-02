@@ -69,7 +69,7 @@ watchEffect(() => {
 </script>
 <template>
   <div class="form-group">
-    <label :for="label" class="text-light my-2">{{ label }} : {{ caliber }}</label>
+    <label :for="label" class="text-dark my-2">{{ label }} : {{ caliber }}</label>
     <input
      :id="label"
       ref="slider"
@@ -103,13 +103,13 @@ input[type="range"] {
                         /***** Track Styles *****/
 /***** Chrome, Safari, Opera, and Edge Chromium *****/
 input[type="range"]::-webkit-slider-runnable-track {
-  background: var(--bs-light);
+  background: var(--bs-dark);
   height: 0.3rem;
 }
 
 /******** Firefox ********/
 input[type="range"]::-moz-range-track {
-  background: var(--bs-light);
+  background: var(--bs-dark);
   height: 0.3rem;
 }
 /***** Thumb Styles *****/

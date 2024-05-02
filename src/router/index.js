@@ -1,6 +1,4 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import GenerativeView from '../views/GenerativeView.vue'
-import ChatView from '../views/ChatView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ModelsView from '../views/ModelsView.vue'
 import VoiceView from '../views/VoiceView.vue'
@@ -29,10 +27,18 @@ const router = createRouter({
       path: '/',
       component: () => import('@/views/base/PageBase.vue'),
       children: [
+        /*{
+          path: '/discover',
+          name: 'discover',
+          component: () => import('@/views/DiscoverView.vue'),
+          meta: {
+            requiresAuth: true
+          }
+        }*/
         {
           path: '/gen',
           name: 'gen',
-          component: GenerativeView,
+          component: ()=> import('@/views/GenerativeView.vue'),
           meta: {
             requiresAuth: true
           }
@@ -40,7 +46,7 @@ const router = createRouter({
         {
           path: '/chat',
           name: 'chat',
-          component: ChatView,
+          component: import('@/views/ChatView.vue'),
           meta: {
             requiresAuth: true
           }

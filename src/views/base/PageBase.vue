@@ -40,7 +40,13 @@ const reset = ()=>{
               <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                 <i class="fs-4 bi-robot"></i> <span class="ms-1 d-none d-sm-inline">ChatBots</span> </a>
               <ul class="collapse show nav flex-column ms-lg-5" id="submenu1" data-bs-parent="#menu">
-                <li class="w-100">
+                <!--li class="w-100">
+                  <RouterLink to="/discover" class="nav-link px-0">
+                    <i class="fs-4 bi-h-square"></i>
+                    <span class="ms-1 d-none d-sm-inline">Discover</span>
+                    
+                  </RouterLink>
+                </li--> <li class="w-100">
                   <RouterLink to="/gen" class="nav-link px-0">
                     <i class="fs-4 bi-h-square"></i>
                     <span class="ms-1 d-none d-sm-inline">Instruct</span>
@@ -123,10 +129,10 @@ const reset = ()=>{
     </div>
   </div>
   <div class="container">
-    <div class="offcanvas offcanvas-end bg-dark" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
+    <div class="offcanvas offcanvas-end bg-light" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
       id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h2 class="offcanvas-title text-light" id="offcanvasNavbarLabel">Settings <span><button class="btn btn-sm btn-outline-warning" @click="reset">reset</button></span></h2>
+        <h2 class="offcanvas-title text-dark" id="offcanvasNavbarLabel">Settings </h2>
         <button type="button" class="btn-close close" data-bs-dismiss="offcanvas" aria-label="Close" >
         
         </button>
@@ -158,7 +164,9 @@ const reset = ()=>{
               :caliber="params.modelParams.seed"  :min="0" :max="100"
               @change="params.changeModelParams" />
           </div>
-        
+          <div class="col-lg-10 my-3">
+          <button class="btn btn-sm btn-outline-warning" @click="reset">reset</button>
+        </div>
         </div>
       </div>
     </div>
