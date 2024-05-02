@@ -1,0 +1,1 @@
+function o(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}const l=(e,s="id-ID",r=1,a=1,c=1)=>{let n=window.speechSynthesis,t=new SpeechSynthesisUtterance(e);return t.lang=s,t.rate=a,t.pitch=c,t.volume=r,n.cancel(),n.speak(t)};var p=l;const u=o(p);export{u as T};
