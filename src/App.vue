@@ -6,16 +6,13 @@ import {
 </script>
 
 <template>
-  
         <RouterView />
-   
 </template>
 <style .scoped>
 * {
     box-sizing: border-box !important;
 }
-
-body,
+body
 div.cont {
     background-color: black;
     height: 100vh;

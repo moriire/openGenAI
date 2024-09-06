@@ -1,28 +1,33 @@
 <template>
-
-    <!--div class="m-2 col-lg-6 col-sm-8 col-xs-8 bg-dark py-5"-->
-    <h2 class="text-light text-center">Login
-
-    </h2>
-    <form @submit.prevent="handleLogin">
-        <div class="form-group m-3 p-3">
-            <input class="form-control" v-model="credential.username" type="email" placeholder="Email" required />
+    <template v-if="authStore.token">
+        <h2 class="text-center">You are already logged in</h2>
+        <div class="text-center">
+            <button @click="authStore.logout()" class="btn btn-warning">Logout</button>
         </div>
-        <div class="form-group m-3 p-3">
-            <input class="form-control" v-model="credential.password" type="password" placeholder="Password" required />
-            <div class="justify-content-end d-flex">
-                <a href="#" class="btn btn-link text-warning text-decoration-none">forgot password?</a>
+    </template>
+    <template v-else>
+        <h2 class="text-light text-center">Login</h2>
+        <form @submit.prevent="handleLogin">
+            <div class="form-group m-3 p-3">
+                <input class="form-control" v-model="credential.username" type="email" placeholder="Email" required />
             </div>
+            <div class="form-group m-3 p-3">
+                <input class="form-control" v-model="credential.password" type="password" placeholder="Password"
+                    required />
+                <div class="justify-content-end d-flex">
+                    <a href="#" class="btn btn-link text-warning text-decoration-none">forgot password?</a>
+                </div>
 
+            </div>
+            <div class="form-group text-center d-block d-grid m-3 p-3">
+                <button type="submit" class="btn btn-outline-warning">Login</button>
+            </div>
+        </form>
+        <div class="text-center">
+            Don't have an account yet?
+            <RouterLink to="/auth/register" class="btn btn-link text-warning text-decoration-none">Sign up</RouterLink>
         </div>
-        <div class="form-group text-center d-block d-grid m-3 p-3">
-            <button type="submit" class="btn btn-outline-warning">Login</button>
-        </div>
-    </form>
-    <div class="text-light text-center">
-        Don't have an account yet?
-        <RouterLink to="/auth/register" class="btn btn-link text-warning text-decoration-none">Sign up</RouterLink>
-    </div>
+    </template>
     <!--/div-->
 
 </template>
@@ -44,9 +49,8 @@ export default {
             is_verified: true
         });
         const authStore = useAuthStore();
-
         const handleLogin = async () => {
-           
+
             try {
                 await authStore.login(credential.username, credential.password);
                 // Redirect to a protected route or home page
@@ -56,7 +60,7 @@ export default {
             }
         };
 
-        return { credential, handleLogin };
+        return { credential, handleLogin, authStore };
     },
 };
 </script>

@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import SettingsView from '../views/SettingsView.vue'
-import ModelsView from '../views/ModelsView.vue'
 import VoiceView from '../views/VoiceView.vue'
 import { useAuthStore } from '@/stores/auth'
 const router = createRouter({
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active',
   history: createWebHashHistory(import.meta.env.BASE_URL),
   //history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -16,7 +16,6 @@ const router = createRouter({
           alias: '/',
           component: () => import('@/views/auth/LoginView.vue')
         },
-
         {
           path: 'register',
           component: () => import('@/views/auth/RegisterView.vue')
@@ -27,14 +26,6 @@ const router = createRouter({
       path: '/',
       component: () => import('@/views/base/PageBase.vue'),
       children: [
-        /*{
-          path: '/discover',
-          name: 'discover',
-          component: () => import('@/views/DiscoverView.vue'),
-          meta: {
-            requiresAuth: true
-          }
-        }*/
         {
           path: '/gen',
           name: 'gen',
@@ -52,16 +43,6 @@ const router = createRouter({
           }
         },
       ]
-    },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: SettingsView
-    },
-    {
-      path: '/models',
-      name: 'models',
-      component: ModelsView
     },
     {
       path: '/voice',

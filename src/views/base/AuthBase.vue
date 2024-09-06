@@ -1,14 +1,11 @@
 <script setup>
-import SliderControl from "@/components/SliderControll.vue"
 import { useVoiceSettingsStore } from '@/stores/counter';
 import axios from 'axios';
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from 'vue-router';
 import { Typer } from 'vue3-typer';
 import "vue3-typer/dist/vue-typer.css";
-const params = useVoiceSettingsStore();
 import {
-    RouterLink,
     RouterView
 } from 'vue-router'
 const router = useRouter();
@@ -25,12 +22,12 @@ const reset = () => {
             <div class="col-lg-6 .bg-light d-md-block d-none"
                 style="background-image:url(ai-2.png); height: 90vh; background-repeat: no-repeat; background-position: center; background-size: cover;" >
             </div>
-            <div class="col-lg-6 row h-100">
+            <div class="col-lg-6 row h-100 py-4">
                 <div>
-                    <h2 class="text-center text-white my-4">
+                    <h2 class="text-center my-4">
                         open<span class="text-warning">GenAI</span>
                     </h2>
-                    <p class="h4 text-light text-center">
+                    <p class="h4 text-center">
                         <Typer
                             :text="['I am openGenAI', 'I was created to help Human', 'I can be your Personal Assistant', 'Watch out for more useful tools']"
                             erase-style='clear' repeat='Infinity'></Typer>
@@ -71,20 +68,27 @@ const reset = () => {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-.vue-typer {
-    --char-typed-color: var(--bs-light);
-    --char-selected-color: black;
 
+[data-bs-theme="dark"] .vue-typer{
+    --char-typed-color: var(--bs-light) !important;
+}
+[data-bs-theme="light"] .vue-typer{
+    --char-typed-color: var(--bs-dark) !important;
+}
+/*
+.vue-typer {
+    --char-typed-color: var(--bs-dark);
+    --char-selected-color: black;
     --char-typed-background-color: transparent;
     --char-selected-background-color: #ACCEF7;
 
     --caret-idle-color: black;
-    --caret-typing-color: black;
+    --caret-typing-color: var(--bs-dark);
     --caret-selecting-color: black;
     --caret-erasing-color: black;
-    --caret-complete-color: black;
+    --caret-complete-color: var(--bs-dark);
 
     cursor: default;
     user-select: none;
-}
+}*/
 </style>

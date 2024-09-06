@@ -1,197 +1,107 @@
-<script setup>
-import SliderControl from "@/components/SliderControll.vue"
-import { useVoiceSettingsStore } from '@/stores/counter';
-import axios from 'axios';
-import { useAuthStore } from "@/stores/auth";
-import { useRouter} from 'vue-router';
-const params = useVoiceSettingsStore();
+<script>
+import "alertifyjs/build/css/alertify.min.css";
+import SliderControl from "@/components/SliderControll.vue";
+import SideBar from "@/components/SideBar.vue";
+import ThemeSwitcher from '@/components/ThemeSwitcher.vue';
+import { useVoiceSettingsStore } from '@/stores/counter.js';
+import { useGenerateStore } from "@/stores/generate.js";
+import alertify from "alertifyjs";
+
 import {
   RouterLink,
   RouterView
 } from 'vue-router'
-const router = useRouter();
-    const user = useAuthStore();
-    axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
-const reset = ()=>{
-  localStorage.clear()
+export default {
+  components: { RouterLink, RouterView, SliderControl, ThemeSwitcher, SideBar},
+
+  setup() {
+    const gen = useGenerateStore();
+    const showMessage = async () => {
+      await alertify.alert('openGenAI', `Response mode changed to ${resMode.value}`)
+    }
+    const params = useVoiceSettingsStore();
+    return {
+      params,
+      SliderControl,
+      RouterLink,
+      RouterView,
+      showMessage,
+      gen
+    }
+  }
 }
+
 </script>
 
 <template>
-  
+  <div class="offcanvas offcanvas-end offcolor" tabindex="-1" id="offcanvasResponsive"
+    aria-labelledby="offcanvasResponsiveLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-warning" id="offcanvasResponsiveLabel">
+        openGenAI <ThemeSwitcher />
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive"
+        arial-label="close">
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <SideBar />
+    </div>
+  </div>
   <div class="container-fluid">
-    <div class="row flex-nowrap">
-      <div class="col-auto col-md-3 col-lg-3 col-xl-2 px-sm-2 px-0 bg-dark">
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-2 pt-2 text-white min-vh-100">
-          <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span class="fs-2 weight-bold d-none d-sm-inline fst-italic fw-bolder text-decoration-underline">OpenGenAI</span>
-            <i class="d-md-none">OGA</i>
-          </a>
-         
-          <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-           
-            <li class="nav-item">
-              <RouterLink to="/" class="nav-link align-middle px-0">
-                <i class="fs-3 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-              </RouterLink>
+    <div class="row">
+      <div class="col-lg-3 d-none col-lg-block d-none d-lg-block  .bg-dark vh-100 px-4 py-2 sidebar"
+        style="overflow-y: scroll; height:min-content">
+        <div class="navbar-brand text-warning mt-3" to="/">
 
-            </li>
-            <li>
-              <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                <i class="fs-4 bi-robot"></i> <span class="ms-1 d-none d-sm-inline">ChatBots</span> </a>
-              <ul class="collapse show nav flex-column ms-lg-5" id="submenu1" data-bs-parent="#menu">
-                <!--li class="w-100">
-                  <RouterLink to="/discover" class="nav-link px-0">
-                    <i class="fs-4 bi-h-square"></i>
-                    <span class="ms-1 d-none d-sm-inline">Discover</span>
-                    
-                  </RouterLink>
-                </li--> <li class="w-100">
-                  <RouterLink to="/gen" class="nav-link px-0">
-                    <i class="fs-4 bi-h-square"></i>
-                    <span class="ms-1 d-none d-sm-inline">Instruct</span>
-                    
-                  </RouterLink>
-                </li>
-                <li class="w-100">
-                  <RouterLink to="/chat" class="nav-link px-0">
-                    <i class="fs-4 bi-h-square"></i>
-                    <span class="ms-1 d-none d-sm-inline">Chat</span>
-                   
-                  </RouterLink>
-                </li>
-                
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="nav-link px-0 align-middle">
-                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">About</span></a>
-            </li>
-            <!--li>
-              <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-              <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                <li class="w-100">
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-              <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                <li class="w-100">
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                </li>
-                <li>
-                  <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                </li>
-              </ul>
-            </li-->
-            <li>
-              <a href="#" class="nav-link px-0 align-middle" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <i class="fs-3 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings </span> </a>
-            </li>
-          </ul>
-          <hr>
-          <div class="dropdown pb-4">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-              id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/src/assets/dummy.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-              <span class="d-none d-sm-inline mx-1">Loggedin</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <!--li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#" >Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li-->
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" type="button" @click="user.logout()">Sign out</a></li>
-            </ul>
-          </div>
+          <h2>openGenAI <span class="float-end"><ThemeSwitcher/></span></h2>
         </div>
+       <SideBar />
       </div>
-      <div class="col .py-3 m-0 p-0">
-        
+      <div class="col-lg-9 main py-4">
+        <nav class="m-3 navbar navbar-expand-lg navbar-expand-md navbar-light d-lg-none  ">
+          <a class="navbar-brand text-warning mb-4 my-4" href="#">
+            <h2>openGenAI</h2>
+          </a>
+          <button class="navbar-toggler bg-warning" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+            <span class="bi bi-list"></span>
+          </button>
+        </nav>
+
         <RouterView />
       </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="offcanvas offcanvas-end bg-light" sdata-bs-scroll="true" data-bs-backdrop="static" tabindex="-1"
-      id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h2 class="offcanvas-title text-dark" id="offcanvasNavbarLabel">Settings </h2>
-        <button type="button" class="btn-close close" data-bs-dismiss="offcanvas" aria-label="Close" >
-        
-        </button>
-      </div>
-
-      <div class="offcanvas-body">
-        <div class="row justify-content-center">
-          <div class="col-lg-10 my-2">
-            <SliderControl v-model="params.modelParams.temperature" label="Temperature" :min="0" :max="1" :step=".1"
-              :caliber="params.modelParams.temperature" @change="params.changeModelParams" />
-          </div>
-
-          <div class="col-lg-10 my-2">
-            <SliderControl v-model="params.modelParams.top_p" label="Top_p" :caliber="params.modelParams.top_p" :min="0"
-              :max="1.0" :step="0.05" @change="params.changeModelParams" />
-          </div>
-
-          <div class="col-lg-10 my-2">
-            <SliderControl v-model="params.modelParams.top_k" label="Top_k" :caliber="params.modelParams.top_k" :min="0"
-              :max="100" :step="5" @change="params.changeModelParams" />
-          </div>
-          <div class="col-lg-10 my-2">
-            <SliderControl v-model="params.modelParams.n_ctx" label="num_ctx" :caliber="params.modelParams.n_ctx"
-              :min="126" :max="8192" :step="126" @change="params.changeModelParams" />
-          </div>
-
-          <div class="col-lg-10 my-2">
-            <SliderControl v-model="params.modelParams.seed" label="seed"
-              :caliber="params.modelParams.seed"  :min="0" :max="100"
-              @change="params.changeModelParams" />
-          </div>
-          <div class="col-lg-10 my-3">
-          <button class="btn btn-sm btn-outline-warning" @click="reset">reset</button>
-        </div>
-        </div>
-      </div>
+     
     </div>
 
   </div>
-
 </template>
 
-<style .scoped>
-.btn-close{
---bs-btn-close-color: white;
-color: white !important;
-}
-* {
-  box-sizing: border-box !important;
-}
-body,
+<style>
+
+
 div.cont {
-  background-color: black;
+  /*background-color: black;*/
   height: 100vh;
+}
+
+.nav-link {
+  color: var(--bs-light);
+}
+
+.nav-link:hover {
+  color: var(--bs-dark);
+  background-color: var(--bs-warning);
+}
+
+.nav-pills a.nav-link.active {
+  color: var(--bs-dark);
+  background-color: var(--bs-warning);
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 }
 
 /* Track */
@@ -208,4 +118,152 @@ div.cont {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+[data-bs-theme="light"] body, [data-bs-theme="light"] div.sidebar, [data-bs-theme="light"] div.main{
+    background-color: white !important;
+    color: black !important;
+}
+[data-bs-theme="light"] div.offcolor{
+  background-color: var(--bs-light);
+}
+[data-bs-theme="light"] div#main div.text-light, [data-bs-theme="light"]  a.nav-link {
+    color: var(--bs-dark) !important;
+}
+[data-bs-theme="light"] hr{
+    border-color: var(--bs-dark);
+}
+[data-bs-theme="light"] div.slider label{
+    color: var(--bs-dark);
+}
+
+[data-bs-theme="light"] input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+                          /***** Track Styles *****/
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+ [data-bs-theme="light"] input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--bs-dark);
+    height: 0.5rem;
+  }
+  
+  /******** Firefox ********/
+[data-bs-theme="light"] input[type="range"]::-moz-range-track {
+    background: var(--bs-light);
+    height: 0.5rem;
+  }
+  /***** Thumb Styles *****/
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+ [data-bs-theme="light"] input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none; /* Override default look */
+     appearance: none;
+     margin-top: -12px; /* Centers thumb on the track */
+     background-color: var(--bs-yellow);
+     height: 2rem;
+     width: 1rem;    
+  }
+  /***** Thumb Styles *****/
+  /***** Firefox *****/
+[data-bs-theme="light"]  input[type="range"]::-moz-range-thumb {
+      border: none; /*Removes extra border that FF applies*/
+      border-radius: 0; /*Removes default border-radius that FF applies*/
+      background-color: var(--bs-yellow);
+      height: 2rem;
+      width: 1rem;
+  }
+  /***** Focus Styles *****/
+  /* Removes default focus */
+[data-bs-theme="light"]  input[type="range"]:focus {
+    outline: none;
+  }
+  
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+ [data-bs-theme="light"] input[type="range"]:focus::-webkit-slider-thumb {
+    border: 1px solid var(--bs-yellow);
+    outline: 3px solid var(--bs-yellow);
+    outline-offset: 0.125rem;
+  }
+  
+  /******** Firefox ********/
+[data-bs-theme="light"] input[type="range"]:focus::-moz-range-thumb {
+    border: 1px solid var(--bs-yellow);
+    outline: 3px solid var(--bs-yellow);
+    outline-offset: 0.125rem;     
+  }
+
+
+
+
+/* Dark Theme */
+
+html[data-bs-theme="dark"] body {
+    background-color: black !important;
+    color: white;
+}
+[data-bs-theme="dark"] div.offcolor{
+  background-color: var(--bs-dark);
+}
+[data-bs-theme="dark"] div#user, div#system{
+    color: var(--bs-dark) !important;
+}
+
+[data-bs-theme="dark"] input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+                          /***** Track Styles *****/
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+  [data-bs-theme="dark"] input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--bs-light);
+    height: 0.5rem;
+  }
+  
+  /******** Firefox ********/
+[data-bs-theme="dark"] input[type="range"]::-moz-range-track {
+    background: var(--bs-light);
+    height: 0.5rem;
+  }
+  /***** Thumb Styles *****/
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+ [data-bs-theme="dark"] input[type="range"]::-webkit-slider-thumb {
+     -webkit-appearance: none; /* Override default look */
+     appearance: none;
+     margin-top: -12px; /* Centers thumb on the track */
+     background-color: var(--bs-yellow);
+     height: 2rem;
+     width: 1rem;    
+  }
+  /***** Thumb Styles *****/
+  /***** Firefox *****/
+[data-bs-theme="dark"]  input[type="range"]::-moz-range-thumb {
+      border: none; /*Removes extra border that FF applies*/
+      border-radius: 0; /*Removes default border-radius that FF applies*/
+      background-color: var(--bs-yellow);
+      height: 2rem;
+      width: 1rem;
+  }
+  /***** Focus Styles *****/
+  /* Removes default focus */
+[data-bs-theme="dark"] input[type="range"]:focus {
+    outline: none;
+  }
+  
+  /***** Chrome, Safari, Opera, and Edge Chromium *****/
+[data-bs-theme="dark"] input[type="range"]:focus::-webkit-slider-thumb {
+    border: 1px solid var(--bs-yellow);
+    outline: 3px solid var(--bs-yellow);
+    outline-offset: 0.125rem;
+  }
+  
+  /******** Firefox ********/
+[data-bs-theme="dark"] input[type="range"]:focus::-moz-range-thumb {
+    border: 1px solid var(--bs-yellow);
+    outline: 3px solid var(--bs-yellow);
+    outline-offset: 0.125rem;     
+  }
+
 </style>
