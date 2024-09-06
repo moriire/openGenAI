@@ -1,6 +1,6 @@
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import VoiceView from '../views/VoiceView.vue'
-import { useAuthStore } from '@/stores/auth'
+import { createRouter, createWebHashHistory } from 'vue-router'
+//import VoiceView from '../views/VoiceView.vue'
+import { useAuthStore } from '../stores/auth'
 const router = createRouter({
   linkActiveClass: 'active',
   linkExactActiveClass: 'active',
@@ -8,28 +8,28 @@ const router = createRouter({
   //history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      component: () => import('@/views/base/AuthBase.vue'),
+      component: () => import('../views/base/AuthBase.vue'),
       path: '/auth',
       children: [
         {
           path: 'login',
           alias: '/',
-          component: () => import('@/views/auth/LoginView.vue')
+          component: () => import('../views/auth/LoginView.vue')
         },
         {
           path: 'register',
-          component: () => import('@/views/auth/RegisterView.vue')
+          component: () => import('../views/auth/RegisterView.vue')
         }
       ]
     },
     {
       path: '/',
-      component: () => import('@/views/base/PageBase.vue'),
+      component: () => import('../views/base/PageBase.vue'),
       children: [
         {
           path: '/gen',
           name: 'gen',
-          component: ()=> import('@/views/GenerativeView.vue'),
+          component: () => import('../views/GenerativeView.vue'),
           meta: {
             requiresAuth: true
           }
@@ -37,17 +37,12 @@ const router = createRouter({
         {
           path: '/chat',
           name: 'chat',
-          component: import('@/views/ChatView.vue'),
+          component: import('../views/ChatView.vue'),
           meta: {
             requiresAuth: true
           }
-        },
+        }
       ]
-    },
-    {
-      path: '/voice',
-      name: 'voice',
-      component: VoiceView
     },
     {
       path: '/about',

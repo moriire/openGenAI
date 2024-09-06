@@ -1,19 +1,15 @@
 <script setup>
-import { useVoiceSettingsStore } from '@/stores/counter';
+//import { useVoiceSettingsStore } from '@/stores/counter';
 import axios from 'axios';
-import { useAuthStore } from "@/stores/auth";
-import { useRouter } from 'vue-router';
+import { useAuthStore } from "../../stores/auth.js";
 import { Typer } from 'vue3-typer';
 import "vue3-typer/dist/vue-typer.css";
 import {
     RouterView
 } from 'vue-router'
-const router = useRouter();
 const user = useAuthStore();
 axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
-const reset = () => {
-    localStorage.clear()
-}
+
 </script>
 
 <template>

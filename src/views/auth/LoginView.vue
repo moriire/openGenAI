@@ -1,3 +1,37 @@
+
+<script>
+import { useAuthStore } from '../../stores/auth';
+import { reactive } from "vue"
+import {
+    RouterLink,
+} from 'vue-router';
+
+export default {
+    components: [RouterLink],
+    setup() {
+        const credential = reactive({
+            username: '',
+            password: '',
+            is_active: true,
+            is_verified: true
+        });
+        const authStore = useAuthStore();
+        const handleLogin = async () => {
+
+            try {
+                await authStore.login(credential.username, credential.password);
+                // Redirect to a protected route or home page
+
+            } catch (error) {
+                console.error('Login error:', error);
+            }
+        };
+
+        return { credential, handleLogin, authStore };
+    },
+};
+</script>
+
 <template>
     <template v-if="authStore.token">
         <h2 class="text-center">You are already logged in</h2>
@@ -31,36 +65,3 @@
     <!--/div-->
 
 </template>
-
-<script>
-import { useAuthStore } from '@/stores/auth';
-import { ref, reactive } from "vue"
-import {
-    RouterLink,
-} from 'vue-router';
-
-export default {
-    components: [RouterLink],
-    setup() {
-        const credential = reactive({
-            username: '',
-            password: '',
-            is_active: true,
-            is_verified: true
-        });
-        const authStore = useAuthStore();
-        const handleLogin = async () => {
-
-            try {
-                await authStore.login(credential.username, credential.password);
-                // Redirect to a protected route or home page
-
-            } catch (error) {
-                console.error('Login error:', error);
-            }
-        };
-
-        return { credential, handleLogin, authStore };
-    },
-};
-</script>
